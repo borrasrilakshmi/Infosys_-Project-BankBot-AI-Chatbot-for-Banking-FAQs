@@ -3,7 +3,7 @@ import sqlite3
 from groq import Groq
 
 # ================= CONFIG =================
-GROQ_API_KEY = "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"
+GROQ_API_KEY = ""
 DB_FILE = "bankbot.db"
 
 # Initialize Groq client
