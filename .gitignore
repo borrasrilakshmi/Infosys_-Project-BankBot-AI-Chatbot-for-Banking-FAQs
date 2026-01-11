@@ -1,0 +1,33 @@
+# Ignore models folder
+models/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+.*pyd
+.*pyc 
+*$py.class
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore dataset files
+data/
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.parquet
+
+# Ignore environment files
+.env
+
+# Ignore API key experiments
+nlu_engine/Experiments/llm_groq.py.py

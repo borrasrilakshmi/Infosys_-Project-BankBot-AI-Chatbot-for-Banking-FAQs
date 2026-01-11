@@ -1,0 +1,20 @@
+# streamlit_app.py
+import streamlit as st
+import json
+from nlu_engine.infer_intent import IntentClassifier
+from nlu_engine.entity_extractor import EntityExtractor
+
+# ---------------- Page Config ----------------
+st.set_page_config(page_title=
+                   ' Sri Lakshmi's BankBot NLU", layout="wide")
+
+# ---------------- Helper Functions ----------------
+INTENTS_FILE = "nlu_engine/intents.json"
+
+def load_intents():
+    try:
+        with open(INTENTS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"intents": []}
+
