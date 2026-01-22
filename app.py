@@ -52,39 +52,50 @@ if "logged_in" not in st.session_state:
 if "page" not in st.session_state:
     st.session_state.page = "Create Account"
 
+if "sidebar_warning" not in st.session_state:
+    st.session_state.sidebar_warning = ""
+
 # ---------------- SIDEBAR ----------------
 with st.sidebar:
     st.title("🏦 BankBot")
 
     if st.button("📝 Create Account"):
         st.session_state.page = "Create Account"
+        st.session_state.sidebar_warning = ""
 
     if st.button("🔐 Login"):
         st.session_state.page = "Login"
+        st.session_state.sidebar_warning = ""
 
     if st.button("💰 Check Balance"):
         if st.session_state.logged_in:
             st.session_state.page = "Check Balance"
+            st.session_state.sidebar_warning = ""
         else:
-            st.warning("Please login first")
+            st.session_state.sidebar_warning = "⚠ Please login first"
 
     if st.button("💸 Transfer Money"):
         if st.session_state.logged_in:
             st.session_state.page = "Transfer Money"
+            st.session_state.sidebar_warning = ""
         else:
-            st.warning("Please login first")
+            st.session_state.sidebar_warning = "⚠ Please login first"
 
     st.divider()
 
     if st.button("🚪 Logout"):
         st.session_state.logged_in = False
         st.session_state.page = "Login"
-        st.success("Logged out successfully")
+        st.session_state.sidebar_warning = "✅ Logged out successfully"
 
 # ---------------- HEADER ----------------
 st.markdown("<h1>🏦 BankBot Assistant</h1>", unsafe_allow_html=True)
 st.markdown("<h3>Milestone 2 – Dialogue Manager</h3>", unsafe_allow_html=True)
 st.divider()
+
+# ---------------- SHOW SIDEBAR WARNINGS SAFELY ----------------
+if st.session_state.sidebar_warning:
+    st.warning(st.session_state.sidebar_warning)
 
 # ---------------- CREATE ACCOUNT ----------------
 if st.session_state.page == "Create Account":
@@ -94,10 +105,7 @@ if st.session_state.page == "Create Account":
     name = st.text_input("Name")
     acc_no = st.text_input("Account Number")
 
-    acc_type = st.selectbox(
-        "Account Type",
-        ["Savings", "Current"]
-    )
+    acc_type = st.selectbox("Account Type", ["Savings", "Current"])
 
     init_balance = st.number_input(
         "Initial Balance",
@@ -110,13 +118,11 @@ if st.session_state.page == "Create Account":
     if st.button("Create Account"):
         if name and acc_no and password:
             st.success("Account created successfully!")
-            st.info(
-                f"""
-                **Account Details**
-                - Account Type: {acc_type}
-                - Initial Balance: ₹{init_balance}
-                """
-            )
+            st.info(f"""
+            **Account Details**
+            - Account Type: {acc_type}
+            - Initial Balance: ₹{init_balance}
+            """)
         else:
             st.error("Please fill all fields")
 
